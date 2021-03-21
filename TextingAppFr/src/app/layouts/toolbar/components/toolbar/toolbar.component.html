@@ -1,0 +1,18 @@
+<mat-toolbar #matToolbar color="primary" fxLayout="row">
+    <mat-toolbar-row>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <img class="branding" src="../../../../../assets/images/brand.png" alt="">
+            <span>TextingApp</span>
+        </div>
+        <div class="spacer"></div>
+
+        <div class="nav-items" fxLayout="row" fxLayoutGap="15px">
+            <div *ngIf="user" class="color-white">
+                <span>{{user.firstName}} {{user.lastName}}</span>
+            </div>
+            <div class="item" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" (click)="signoutUser()">
+                <mat-icon svgIcon="signout" class="color-icon"></mat-icon>
+            </div>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

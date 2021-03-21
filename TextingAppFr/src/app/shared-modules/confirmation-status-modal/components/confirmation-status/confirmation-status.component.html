@@ -1,0 +1,62 @@
+<div fxLayout="column" fxLayoutGap="30px" *ngIf="!modalConfig.isLoader">
+  <div fxLayout="column" fxLayoutGap="20px">
+    <div
+      *ngIf="modalConfig.matIcon && !modalConfig.localIcon"
+      fxLayoutAlign="center center"
+      class="modal-icon"
+    >
+      <mat-icon [style.color]="typeColor">{{ modalConfig.matIcon }}</mat-icon>
+    </div>
+    <div
+      *ngIf="modalConfig.localIcon"
+      class="modal-icon"
+      fxLayoutAlign="center center"
+    >
+      <mat-icon
+        [svgIcon]="modalConfig.localIcon"
+        [style.color]="typeColor"
+      ></mat-icon>
+    </div>
+    <div fxLayout="column" fxLayoutGap="15px">
+      <div fxLayoutAlign="center center" *ngIf="modalConfig.headerText">
+        <span class="text-center modal-header">{{
+          modalConfig.headerText
+        }}</span>
+      </div>
+      <div fxLayoutAlign="center center" *ngIf="modalConfig.description">
+        <span class="modal-description">{{ modalConfig.description }}</span>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <button
+      mat-stroked-button
+      class="outline-secondary-button"
+      [color]="modalConfig.color"
+      *ngIf="modalConfig.secondaryButtonName"
+      (click)="secodaryButton($event)"
+    >
+      {{ modalConfig.secondaryButtonName }}
+    </button>
+    <button
+      mat-raised-button
+      [color]="modalConfig.color"
+      *ngIf="modalConfig.primaryButtonName"
+      (click)="primaryButton($event)"
+    >
+      {{ modalConfig.primaryButtonName }}
+    </button>
+  </div>
+</div>
+<div
+  *ngIf="modalConfig.isLoader"
+  fxLayoutAlign="start center"
+  fxLayoutGap="30px"
+>
+  <div>
+    <mat-spinner diameter="40" [color]="modalConfig.color"></mat-spinner>
+  </div>
+  <div>
+    <span style="font-size: 16px">{{ modalConfig.loaderText }}</span>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+<div class="full-width pages" fxLayout="row" fxLayoutGap="10px">
+    <section fxFlex="20" style="padding-top: 40px;">
+        <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="start center"
+            *ngIf="selectedUser">
+            <div class="avatar-circle accent-background" fxLayoutAlign="center center">
+                <span class="avatar-type color-white">{{selectedUser.firstName[0]}}</span>
+            </div>
+            <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+                <span class="selected-friend">{{selectedUser.firstName}} {{selectedUser.lastName}}</span>
+                <span class="gray-color" style="font-size: 14px;">{{selectedUser.mail}}</span>
+            </div>
+        </div>
+    </section>
+    <section fxFlex="60" fxLayout="column" class="">
+        <h3 class="accent-color">Messages</h3>
+    
+        <div class="message-box" fxLayoutAlign="end end">
+            <div class="full-width" style="padding-bottom: 5px;" fxLayoutAlign="end end" [hidden]="!messageGroup">
+                <div #textContainer class="tex-container full-width">
+                    <div class="full-height" fxLayout="column" fxLayoutAlign="end end" fxLayoutGap="10px">
+                        <ng-container *ngFor="let message of messageList">
+                            <div class="full-width" fxLayoutAlign="start start" *ngIf="message.ownerId==id">
+                                <div class="message-container gray-background">
+                                    <span>{{message.sentMessage}}</span>
+                                </div>
+                                 <div class="remove-button" fxLayoutAlign="center center">
+                                    <button  mat-icon-button [matMenuTriggerFor]="menu">
+                                        <mat-icon class="remove-msg">more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item (click)="removeMessage(message, 'DeleteForMe')">
+                                          <span>Delete for only me</span>
+                                        </button>
+                                      </mat-menu>
+                                </div>
+                            </div>
+                            <div class="full-width" fxLayoutAlign="end end" *ngIf="message.ownerId==currentUser.id">
+                                <div class="message-container accent-background color-white">
+                                    <span>{{message.sentMessage}}</span>
+                                </div>
+                                <div class="remove-button" fxLayoutAlign="center center">
+                                    <button  mat-icon-button [matMenuTriggerFor]="menu">
+                                        <mat-icon class="remove-msg">more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item (click)="removeMessage(message, 'DeleteForEveryone')">
+                                          <span>Delete for everyone</span>
+                                        </button>
+
+                                        <button mat-menu-item (click)="removeMessage(message, 'DeleteForMe')">
+                                          <span>Delete for only me</span>
+                                        </button>
+                                      </mat-menu>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="full-width full-height" fxLayoutAlign="start center" *ngIf="!selectedUser">
+                <div class="help primary-color" fxLayout="column" fxLayoutAlign="center center">
+                    <span style="text-align: center;">Select a user to start chat with</span>
+                </div>
+            </div>
+        </div>
+        <div class="message-bar" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <textarea class="text-bar" [(ngModel)]="message" matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="2"></textarea>
+            <button mat-mini-fab color="accent" (click)="sendMessage()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </section>
+    <section fxLayout="column" fxLayoutGa="15px" fxFlex="20">
+        <section style="padding-right: 10px;" class="messages" fxLayout="column">
+            <div fxLayout="column" style="padding-bottom: 10px;" *ngIf="newMesasge.length!=0">
+                <h3 class="accent-color">New Message</h3>
+                <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start" class="message-name cursor-pointer"
+                    *ngFor="let message of newMesasge" (click)="selectMessage(message)">
+                    <span
+                        class="bold-name primary-color">{{getUserFromId(message.textMessages[message.textMessages.length-1].ownerId)}}</span>
+                    <span class="bold-message">{{message.textMessages[message.textMessages.length-1].sentMessage}}</span>
+                </div>
+            </div>
+            <h3 class="accent-color">History</h3>
+            <div fxLayout="column" fxLayoutGap="10px" *ngIf="oldMessages">
+                <div fxLayout="row" fxLayoutAlign="start start" class="message-name cursor-pointer"
+                    *ngFor="let old of oldMessages">
+                    <div class="message-hover full-width" fxLayout="column" fxLayoutGap="5px"
+                        (click)="selectUser(old.name)">
+                        <span class="accent-color" *ngIf="old.name">{{old.name.firstName}} {{old.name.lastName}}</span>
+                        <span class="old-msg gray-color">{{old.textMessages[old.textMessages.length-1].sentMessage}}</span>
+                    </div>
+                    <button mat-icon-button (click)="deleteMessage(old)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section fxLayout="column" class="messages">
+            <h3 class="accent-color">Peoples</h3>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let user of userList" (click)="selectUser(user)">
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+                        <div class="avatar accent-background" fxLayoutAlign="center center">
+                            <span class="color-white" style="font-weight: 600;font-size: 14px;">{{user.firstName[0]}}</span>
+                        </div>
+                        <span class="user-name">{{user.firstName}} {{user.lastName}}</span>
+                    </div>
+                </mat-list-item>
+            </mat-nav-list>
+        </section>
+    </section>
+</div>

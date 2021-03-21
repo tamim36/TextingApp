@@ -1,0 +1,31 @@
+<div class="page-theme primary-background" fxLayoutAlign="center center">
+  <mat-card class="sigin-form secondary-background" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <div @fadeOut class="full-height full-width" fxLayoutAlign="center center" fxLayout="column">
+      <div class="auth-img">
+        <img src="../../../../assets/images/welcome.svg" alt="">
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <span class="primary-color" style="font-weight: 600;font-size: 16px;">Don't have an account ?</span>
+        <button mat-stroked-button color="primary" routerLink="/signup">
+          SignUp Now
+        </button>
+      </div>
+    </div>
+    <div @fadeOut class="sigin" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="center center">
+      <span class="form-title">Sign In</span>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="mail" type="email" />
+          <mat-error>
+            {{ errorObserver$.mail | async }}
+          </mat-error>
+        </mat-form-field>
+        <span *ngIf="invalid" class="warn-color">Incorrect credential</span>
+        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="isLoading">
+          SignIn
+        </button>
+      </form>
+    </div>
+  </mat-card>
+</div>

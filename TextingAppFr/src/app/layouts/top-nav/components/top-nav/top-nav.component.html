@@ -1,0 +1,12 @@
+<div class="main-container">
+    <div class="container-sub">
+        <ng-container *ngTemplateOutlet="toolbar"></ng-container>
+        <div class="scroller-container scroller">
+            <app-content></app-content>
+        </div>
+    </div>
+</div>
+
+<ng-template #toolbar>
+    <app-toolbar #matToolbar></app-toolbar>
+</ng-template>

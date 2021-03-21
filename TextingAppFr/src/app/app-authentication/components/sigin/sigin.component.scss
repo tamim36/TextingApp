@@ -1,0 +1,38 @@
+.page-theme {
+  width: 100%;
+}
+
+.sigin-form {
+  width: calc(100% - 50px);
+  height: calc(100% - 200px);
+  max-width: 900px;
+  overflow: hidden;
+  .sigin {
+    display: flex;
+    background-color: white;
+    padding: 20px 30px 20px 30px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px 0px #555555;
+  }
+}
+
+.title {
+  font-size: 1rem;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.forgot {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.auth-img{
+  img{
+    height: 300px;
+    width: 300px;
+  }
+}

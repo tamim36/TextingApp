@@ -1,0 +1,47 @@
+<div class="page-theme primary-background" fxLayoutAlign="center center">
+  <mat-card class="sigin-form mat-elevation-z5" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <div @fadeOut class="sigin full-width" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="center center">
+      <span class="form-title">Sign Up</span>
+      <form class="full-width" fxLayout="column" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstname" type="text" />
+          <mat-error>
+            {{ errorObserver.firstname | async }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastname" type="text" />
+          <mat-error>
+            {{ errorObserver.lastname | async }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="mail" type="email" />
+          <mat-error>
+            {{ errorObserver.mail | async }}
+          </mat-error>
+        </mat-form-field>
+        <span *ngIf="invalid" class="warn-color">Email already exists</span>
+        <button mat-raised-button color="primary" type="submit" class="full-width">
+          SignUp
+        </button>
+      </form>
+    </div>
+    <div @fadeOut class="full-width full-height" fxLayoutAlign="center center" fxLayout="column">
+      <div class="auth-img">
+        <img src="../../../../assets/images/signup.svg" alt="">
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <span class="primary-color" style="font-weight: 600;font-size: 16px;">Already have an account ?</span>
+        <button mat-stroked-button color="primary" routerLink="/signin">
+          Sign In
+        </button>
+      </div>
+      
+    </div>
+  </mat-card>
+</div>
