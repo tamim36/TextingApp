@@ -378,10 +378,6 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-# Ignore all uploaded files
-*.pdf
-FileStorage/
-Datasets/
 
 # compiled output
 TextingAppFr/dist
